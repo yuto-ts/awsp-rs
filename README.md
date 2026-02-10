@@ -19,7 +19,24 @@ aws configure --profile PROFILE_NAME
 
 ## Installation
 
+### Via Homebrew (Recommended)
+
 ```sh
+brew tap yuto-ts/awsp
+brew install awsp-rs
+```
+
+### From Source
+
+```sh
+cargo install --git https://github.com/yuto-ts/awsp-rs
+```
+
+Or clone and install locally:
+
+```sh
+git clone https://github.com/yuto-ts/awsp-rs.git
+cd awsp-rs
 cargo install --path .
 ```
 

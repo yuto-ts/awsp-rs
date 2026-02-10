@@ -1,0 +1,11 @@
+[package]
+name = "awsp-rs"
+version = "0.1.0"
+edition = "2021"
+description = "AWS Profile Switcher - Fast, Rust-based alternative to awsp"
+license = "MIT"
+
+[dependencies]
+dialoguer = { version = "0.11", features = ["fuzzy-select"] }
+dirs = "5"
+clap = { version = "4", features = ["derive"] }

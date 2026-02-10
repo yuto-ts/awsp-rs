@@ -1,55 +1,55 @@
 # awsp-rs
 
-AWS プロファイル切り替えツール — [awsp](https://github.com/johnnyopao/awsp) の Rust 製リライトです。
+AWS Profile Switcher — A Rust rewrite of [awsp](https://github.com/johnnyopao/awsp).
 
-## 特徴
+## Features
 
-- 🔍 **ファジー検索** — 入力するだけでプロファイルを絞り込み
-- ⚡ **高速** — Rust ネイティブバイナリ、Node.js 不要
-- 📋 **現在のプロファイル表示** — 切り替え前に今のプロファイルを表示
-- 🛡️ **安全** — Ctrl+C でキャンセルしても何も変更されない
+- 🔍 **Fuzzy Search** — Filter profiles as you type
+- ⚡ **Fast** — Native Rust binary, no Node.js required
+- 📋 **Current Profile Display** — Shows your current profile before switching
+- 🛡️ **Safe** — Pressing Ctrl+C cancels without making changes
 
-## 前提条件
+## Prerequisites
 
-AWS CLI でプロファイルを設定しておいてください：
+Configure your AWS profiles using the AWS CLI:
 
 ```sh
 aws configure --profile PROFILE_NAME
 ```
 
-## インストール
+## Installation
 
 ```sh
 cargo install --path .
 ```
 
-## セットアップ
+## Setup
 
-`.bashrc` または `.zshrc` に以下を追加してください：
+Add the following to your `.bashrc` or `.zshrc`:
 
 ```sh
 alias awsp='eval "$(awsp-rs)"'
 ```
 
-## 使い方
+## Usage
 
 ```sh
 awsp
 ```
 
-実行すると：
-1. 現在の AWS プロファイルを表示
-2. `~/.aws/config` のプロファイル一覧をファジー検索付きで表示
-3. 選択したプロファイルを `AWS_PROFILE` 環境変数に設定
+When you run this:
+1. Displays your current AWS profile
+2. Shows a fuzzy-searchable list of profiles from `~/.aws/config`
+3. Sets the `AWS_PROFILE` environment variable to your selection
 
-## 仕組み
+## How It Works
 
-`awsp-rs` はシェルコマンド（`export AWS_PROFILE=...` または `unset AWS_PROFILE`）を stdout に出力します。alias の `eval` がこれを現在のシェルで実行し、環境変数を設定します。UI 出力はすべて stderr に出るため、eval と干渉しません。
+`awsp-rs` outputs shell commands (`export AWS_PROFILE=...` or `unset AWS_PROFILE`) to stdout. The `eval` in the alias executes these commands in your current shell, setting the environment variable. All UI output goes to stderr, so it doesn't interfere with `eval`.
 
-## シェルプロンプトに AWS プロファイルを表示する
+## Display AWS Profile in Shell Prompt
 
 ```sh
-# zsh (oh-my-zsh) の場合
+# For zsh (oh-my-zsh)
 function aws_prof {
   local profile="${AWS_PROFILE:=default}"
   echo "%{$fg_bold[blue]%}aws:(%{$fg[yellow]%}${profile}%{$fg_bold[blue]%})%{$reset_color%} "
